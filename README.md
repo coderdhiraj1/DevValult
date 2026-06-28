@@ -1,4 +1,4 @@
-# DevVault - Chrome Extension (Manifest V3)
+# DevVault - Storage Manager for Developers
 
 An offline-first, feature-rich developer tool rendered in a Chrome Side Panel for inspecting, editing, and comparing browser storage (localStorage, sessionStorage, cookies) across tabs and environments.
 
