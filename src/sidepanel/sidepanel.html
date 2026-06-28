@@ -15,19 +15,19 @@
           <img src="/icons/icon-32.png" alt="Logo" class="logo-img">
           <h1>DevVault</h1>
         </div>
-        <button id="btn-settings" class="btn-icon" title="Settings">⚙️</button>
+        <button id="btn-settings" class="btn-icon" title="Settings"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-svg"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
       </div>
       <div class="active-tab-info" id="active-tab-info">
         <span class="tab-favicon" id="tab-favicon"></span>
         <span class="tab-title" id="tab-title">Loading tab...</span>
-        <button id="btn-refresh" class="btn-icon" title="Force Refresh">🔄</button>
+        <button id="btn-refresh" class="btn-icon" title="Force Refresh"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-svg"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg></button>
       </div>
     </header>
 
     <!-- Permission Request Overlay/Screen -->
     <div id="permission-screen" class="screen hidden">
       <div class="permission-card">
-        <div class="permission-icon">🔒</div>
+        <div class="permission-icon"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="screen-icon-svg"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
         <h2>Access Permission Required</h2>
         <p>To inspect and manage storage (localStorage, sessionStorage, and cookies), DevVault needs permission to read the active tab's website.</p>
         <div class="origin-display" id="permission-origin">https://example.com</div>
@@ -39,7 +39,7 @@
     <!-- Non-Inspectable/System Tab Screen -->
     <div id="system-screen" class="screen hidden">
       <div class="system-card">
-        <div class="system-icon">🚫</div>
+        <div class="system-icon"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="screen-icon-svg"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg></div>
         <h2>Inspectable Page Not Found</h2>
         <p>DevVault cannot inspect browser settings, extensions, or blank tabs. Please navigate to a standard website (HTTP/HTTPS/local file) to begin.</p>
       </div>
@@ -63,10 +63,10 @@
           <button id="btn-clear-search" class="search-clear hidden">&times;</button>
         </div>
         <button id="btn-add-entry" class="btn btn-secondary btn-sm" title="Add New Item">+ Add</button>
-        <button id="btn-bulk-delete" class="btn btn-danger-outline btn-sm" title="Delete filtered items">🗑️ Bulk</button>
+        <button id="btn-bulk-delete" class="btn btn-danger-outline btn-sm" title="Delete filtered items"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon-inline"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>Bulk</button>
         <div class="export-import-actions">
-          <button id="btn-export-json" class="btn btn-icon" title="Export Storage to JSON">📥 Export</button>
-          <button id="btn-import-json" class="btn btn-icon" title="Import Storage from JSON">📤 Import</button>
+          <button id="btn-export-json" class="btn btn-icon" title="Export Storage to JSON"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon-inline"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>Export</button>
+          <button id="btn-import-json" class="btn btn-icon" title="Import Storage from JSON"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon-inline"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>Import</button>
           <input type="file" id="file-import" accept=".json" class="hidden">
         </div>
       </div>
@@ -88,7 +88,7 @@
             </table>
             <!-- Empty state -->
             <div id="storage-empty" class="empty-state hidden">
-              <div class="empty-icon">📁</div>
+              <div class="empty-icon"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="empty-icon-svg"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg></div>
               <p>No storage entries found matching filters.</p>
             </div>
           </div>
@@ -122,7 +122,7 @@
             </table>
             <!-- Empty/Ready state -->
             <div id="diff-empty" class="empty-state">
-              <div class="empty-icon">⚖️</div>
+              <div class="empty-icon"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="empty-icon-svg"><path d="M16 16 20 22 24 16"/><path d="M20 3v19"/><path d="M4 16 8 22 12 16"/><path d="M8 3v19"/><path d="M2 8h20"/></svg></div>
               <p>Select a snapshot or active tab to perform a diff comparison.</p>
             </div>
           </div>
@@ -144,7 +144,7 @@
             </div>
             <!-- Empty state -->
             <div id="snapshots-empty" class="empty-state">
-              <div class="empty-icon">📸</div>
+              <div class="empty-icon"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="empty-icon-svg"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></div>
               <p>No snapshots saved for this site yet.</p>
             </div>
           </div>
@@ -159,7 +159,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h2 id="modal-title">Edit Entry</h2>
-          <button class="btn-close-modal">&times;</button>
+          <button class="btn-close-x btn-close-modal">&times;</button>
         </div>
         <div class="modal-body">
           <form id="edit-form">
@@ -190,10 +190,14 @@
               </div>
               <div class="form-row checkbox-row">
                 <label class="checkbox-label">
-                  <input type="checkbox" id="edit-cookie-secure"> Secure
+                  <input type="checkbox" id="edit-cookie-secure">
+                  <span class="custom-checkbox"></span>
+                  Secure
                 </label>
                 <label class="checkbox-label">
-                  <input type="checkbox" id="edit-cookie-httponly"> HttpOnly
+                  <input type="checkbox" id="edit-cookie-httponly">
+                  <span class="custom-checkbox"></span>
+                  HttpOnly
                 </label>
               </div>
               <div class="form-group">
@@ -243,7 +247,7 @@
       <div class="modal-content modal-content-sm">
         <div class="modal-header">
           <h2 id="confirm-title">Confirm Action</h2>
-          <button class="btn-close-modal">&times;</button>
+          <button class="btn-close-x btn-close-modal">&times;</button>
         </div>
         <div class="modal-body">
           <p id="confirm-message">Are you sure you want to perform this action?</p>
@@ -261,28 +265,42 @@
       <div class="modal-content modal-content-sm">
         <div class="modal-header">
           <h2>Settings</h2>
-          <button class="btn-close-modal">&times;</button>
+          <button class="btn-close-x btn-close-modal">&times;</button>
         </div>
         <div class="modal-body">
           <form id="settings-form">
             <div class="form-group">
               <label for="settings-theme">Theme Preference</label>
               <select id="settings-theme">
-                <option value="system">🌓 System Auto</option>
-                <option value="light">☀️ Light Mode</option>
-                <option value="dark">🌙 Dark Mode</option>
+                <option value="system">System Default</option>
+                <option value="light">Light Mode</option>
+                <option value="dark">Dark Mode</option>
               </select>
             </div>
             
             <div class="form-group" style="margin-top: 16px;">
-              <label>Navigation Tabs Visibility</label>
-              <div class="checkbox-row" style="flex-direction: column; gap: 8px; align-items: flex-start; margin: 8px 0 0 0;">
-                <label class="checkbox-label">
-                  <input type="checkbox" id="settings-show-diff" checked> Show Diff Tab
-                </label>
-                <label class="checkbox-label">
-                  <input type="checkbox" id="settings-show-snapshots" checked> Show Snapshots Tab
-                </label>
+              <label style="margin-bottom: 8px;">Navigation Tabs Visibility</label>
+              <div class="settings-list">
+                <div class="setting-item">
+                  <div class="setting-info">
+                    <div class="setting-title">Show Diff Tab</div>
+                    <div class="setting-desc">Compare storage state of the active tab against local snapshots or other tabs to track state changes and drift.</div>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="settings-show-diff" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="setting-item">
+                  <div class="setting-info">
+                    <div class="setting-title">Show Snapshots Tab</div>
+                    <div class="setting-desc">Save localStorage, sessionStorage, and cookies states locally to instantly backup and restore testing environments.</div>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="settings-show-snapshots" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
               </div>
             </div>
           </form>
