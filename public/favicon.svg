@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%" fill="none">
+  <defs>
+    <linearGradient id="orangeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ff8800" />
+      <stop offset="100%" stop-color="#ff2b00" />
+    </linearGradient>
+    <linearGradient id="dbGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f0f3f8" />
+      <stop offset="100%" stop-color="#aab0b9" />
+    </linearGradient>
+    <linearGradient id="dbTopGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#e1e4eb" />
+    </linearGradient>
+
+    <!-- Mask to cutout the magnifying glass gap from the shield and database -->
+    <mask id="cutoutMask">
+      <!-- Everything white remains visible -->
+      <rect x="0" y="0" width="512" height="512" fill="white" />
+      <!-- Everything black is cut out (made transparent) -->
+      <!-- Ring gap -->
+      <circle cx="337.5" cy="305" r="38.75" stroke="black" stroke-width="30" fill="none" />
+      <!-- Handle gap -->
+      <path d="M 371 338.5 L 417.5 385" stroke="black" stroke-width="40" stroke-linecap="round" />
+    </mask>
+  </defs>
+
+  <!-- Masked Content Group -->
+  <g mask="url(#cutoutMask)">
+    <!-- Shield Outline -->
+    <path d="M 125 162.5 Q 190.5 140 256 130 Q 321.5 140 387 162.5 C 387 162.5 405 237.5 375 330 C 356.25 367.5 256 382 256 382 C 256 382 155.75 367.5 137 330 C 107 237.5 125 162.5 125 162.5 Z" 
+          stroke="url(#orangeGrad)" stroke-width="22.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+
+    <!-- Database Cylinder -->
+    <g id="database">
+      <!-- Segment 3 (Bottom) -->
+      <path d="M 170 282.5 v 27.5 a 65 20 0 0 0 130 0 v -27.5 Z" fill="url(#dbGrad)" />
+      <ellipse cx="235" cy="282.5" rx="65" ry="20" fill="url(#dbTopGrad)" />
+      <ellipse cx="235" cy="310" rx="65" ry="20" fill="url(#dbGrad)" />
+
+      <!-- Segment 2 (Middle) -->
+      <path d="M 170 247.5 v 27.5 a 65 20 0 0 0 130 0 v -27.5 Z" fill="url(#dbGrad)" />
+      <ellipse cx="235" cy="247.5" rx="65" ry="20" fill="url(#dbTopGrad)" />
+      <ellipse cx="235" cy="275" rx="65" ry="20" fill="url(#dbGrad)" />
+
+      <!-- Segment 1 (Top) -->
+      <path d="M 170 212.5 v 27.5 a 65 20 0 0 0 130 0 v -27.5 Z" fill="url(#dbGrad)" />
+      <ellipse cx="235" cy="212.5" rx="65" ry="20" fill="url(#dbTopGrad)" />
+      <ellipse cx="235" cy="240" rx="65" ry="20" fill="url(#dbGrad)" />
+    </g>
+  </g>
+
+  <!-- Magnifying Glass (Drawn outside mask so it's not clipped) -->
+  <path d="M 371 338.5 L 412.5 380" stroke="url(#orangeGrad)" stroke-width="17.5" stroke-linecap="round" />
+  <circle cx="337.5" cy="305" r="38.75" stroke="url(#orangeGrad)" stroke-width="17.5" fill="none" />
+</svg>

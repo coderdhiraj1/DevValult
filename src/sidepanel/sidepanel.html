@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevVault</title>
+  <link rel="stylesheet" href="./sidepanel.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-top-row">
+        <div class="logo-area">
+          <img src="/icons/icon-32.png" alt="Logo" class="logo-img">
+          <h1>DevVault</h1>
+        </div>
+        <button id="btn-settings" class="btn-icon" title="Settings">⚙️</button>
+      </div>
+      <div class="active-tab-info" id="active-tab-info">
+        <span class="tab-favicon" id="tab-favicon"></span>
+        <span class="tab-title" id="tab-title">Loading tab...</span>
+        <button id="btn-refresh" class="btn-icon" title="Force Refresh">🔄</button>
+      </div>
+    </header>
+
+    <!-- Permission Request Overlay/Screen -->
+    <div id="permission-screen" class="screen hidden">
+      <div class="permission-card">
+        <div class="permission-icon">🔒</div>
+        <h2>Access Permission Required</h2>
+        <p>To inspect and manage storage (localStorage, sessionStorage, and cookies), DevVault needs permission to read the active tab's website.</p>
+        <div class="origin-display" id="permission-origin">https://example.com</div>
+        <button id="btn-grant-permission" class="btn btn-primary">Grant Access to Site</button>
+        <p class="permission-note">Your data is kept fully offline. No external APIs or network calls are made.</p>
+      </div>
+    </div>
+
+    <!-- Non-Inspectable/System Tab Screen -->
+    <div id="system-screen" class="screen hidden">
+      <div class="system-card">
+        <div class="system-icon">🚫</div>
+        <h2>Inspectable Page Not Found</h2>
+        <p>DevVault cannot inspect browser settings, extensions, or blank tabs. Please navigate to a standard website (HTTP/HTTPS/local file) to begin.</p>
+      </div>
+    </div>
+
+    <!-- Main Workspace Screen -->
+    <div id="workspace-screen" class="screen">
+      <!-- Main Tabs Navigation -->
+      <nav class="main-nav">
+        <button class="nav-tab active" data-tab="local">Local</button>
+        <button class="nav-tab" data-tab="session">Session</button>
+        <button class="nav-tab" data-tab="cookie">Cookies</button>
+        <button class="nav-tab" data-tab="diff">Diff</button>
+        <button class="nav-tab" data-tab="snapshots">Snapshots</button>
+      </nav>
+
+      <!-- Action Panel: Search, Filter, Add, Clear -->
+      <div class="action-bar" id="action-bar">
+        <div class="search-wrapper">
+          <input type="text" id="search-input" placeholder="Search by key or value..." autocomplete="off">
+          <button id="btn-clear-search" class="search-clear hidden">&times;</button>
+        </div>
+        <button id="btn-add-entry" class="btn btn-secondary btn-sm" title="Add New Item">+ Add</button>
+        <button id="btn-bulk-delete" class="btn btn-danger-outline btn-sm" title="Delete filtered items">🗑️ Bulk</button>
+        <div class="export-import-actions">
+          <button id="btn-export-json" class="btn btn-icon" title="Export Storage to JSON">📥 Export</button>
+          <button id="btn-import-json" class="btn btn-icon" title="Import Storage from JSON">📤 Import</button>
+          <input type="file" id="file-import" accept=".json" class="hidden">
+        </div>
+      </div>
+
+      <!-- Content Area -->
+      <main class="content-container">
+        <!-- Storage List View (Local, Session, Cookies) -->
+        <div id="view-storage" class="view-panel active">
+          <div class="table-container">
+            <table class="storage-table">
+              <thead>
+                <tr id="table-headers">
+                  <!-- Dynamic Headers -->
+                </tr>
+              </thead>
+              <tbody id="storage-list">
+                <!-- Rows injected dynamically -->
+              </tbody>
+            </table>
+            <!-- Empty state -->
+            <div id="storage-empty" class="empty-state hidden">
+              <div class="empty-icon">📁</div>
+              <p>No storage entries found matching filters.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Diff View Panel -->
+        <div id="view-diff" class="view-panel">
+          <div class="diff-options">
+            <div class="form-group">
+              <label for="diff-target-select">Compare Active Tab against:</label>
+              <select id="diff-target-select">
+                <option value="">-- Choose target --</option>
+                <!-- Loaded dynamically -->
+              </select>
+            </div>
+            <button id="btn-calculate-diff" class="btn btn-primary btn-sm">Calculate Diff</button>
+          </div>
+          <div class="table-container">
+            <table class="diff-table">
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Key</th>
+                  <th>Value (Active Tab)</th>
+                  <th>Value (Target)</th>
+                </tr>
+              </thead>
+              <tbody id="diff-list">
+                <!-- Diff Rows -->
+              </tbody>
+            </table>
+            <!-- Empty/Ready state -->
+            <div id="diff-empty" class="empty-state">
+              <div class="empty-icon">⚖️</div>
+              <p>Select a snapshot or active tab to perform a diff comparison.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Snapshots Panel -->
+        <div id="view-snapshots" class="view-panel">
+          <div class="snapshot-create-box">
+            <h3>Create Snapshot</h3>
+            <div class="snapshot-input-row">
+              <input type="text" id="snapshot-name-input" placeholder="e.g. Logged In State" autocomplete="off">
+              <button id="btn-create-snapshot" class="btn btn-primary btn-sm">Save Snapshot</button>
+            </div>
+          </div>
+          <div class="snapshots-list-container">
+            <h3>Saved Snapshots for this Origin</h3>
+            <div id="snapshots-list" class="snapshots-grid">
+              <!-- Snapshots injected dynamically -->
+            </div>
+            <!-- Empty state -->
+            <div id="snapshots-empty" class="empty-state">
+              <div class="empty-icon">📸</div>
+              <p>No snapshots saved for this site yet.</p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Modals -->
+    <!-- Detail / Edit Entry Modal -->
+    <div id="modal-edit" class="modal hidden">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="modal-title">Edit Entry</h2>
+          <button class="btn-close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="edit-form">
+            <div class="form-group">
+              <label for="edit-key">Key</label>
+              <input type="text" id="edit-key" required placeholder="Storage Key">
+            </div>
+            <div class="form-group">
+              <label for="edit-value">Value</label>
+              <textarea id="edit-value" rows="6" placeholder="Storage Value (string or JSON)"></textarea>
+            </div>
+            <div id="json-tools" class="json-tools hidden">
+              <span class="json-status valid">✨ Valid JSON</span>
+              <button type="button" id="btn-format-json" class="btn btn-secondary btn-xs">Pretty Print</button>
+            </div>
+            
+            <!-- Cookie specific fields -->
+            <div id="cookie-fields" class="cookie-fields hidden">
+              <div class="form-row">
+                <div class="form-group col">
+                  <label for="edit-cookie-domain">Domain</label>
+                  <input type="text" id="edit-cookie-domain" placeholder="e.g. .example.com">
+                </div>
+                <div class="form-group col">
+                  <label for="edit-cookie-path">Path</label>
+                  <input type="text" id="edit-cookie-path" value="/">
+                </div>
+              </div>
+              <div class="form-row checkbox-row">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="edit-cookie-secure"> Secure
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="edit-cookie-httponly"> HttpOnly
+                </label>
+              </div>
+              <div class="form-group">
+                <label for="edit-cookie-samesite">SameSite</label>
+                <select id="edit-cookie-samesite">
+                  <option value="unspecified">Unspecified</option>
+                  <option value="no_restriction">None</option>
+                  <option value="lax">Lax</option>
+                  <option value="strict">Strict</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="edit-cookie-expiration">Expiration (epoch seconds) - Leave blank for Session</label>
+                <input type="number" id="edit-cookie-expiration" placeholder="e.g. 1798761600">
+              </div>
+            </div>
+
+            <!-- JWT Decoding Tool -->
+            <div id="jwt-decoder-box" class="jwt-decoder-box hidden">
+              <div class="jwt-header">
+                <h3>JWT Detected</h3>
+                <button type="button" id="btn-toggle-jwt-decode" class="btn btn-secondary btn-xs">Decode</button>
+              </div>
+              <div id="jwt-payload-display" class="jwt-payload-display hidden">
+                <div class="jwt-segment">
+                  <h4>Header</h4>
+                  <pre><code id="jwt-header-code">{}</code></pre>
+                </div>
+                <div class="jwt-segment">
+                  <h4>Payload</h4>
+                  <pre><code id="jwt-payload-code">{}</code></pre>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline btn-close-modal">Cancel</button>
+          <button type="button" id="btn-save-entry" class="btn btn-primary">Save Changes</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirm Dialog -->
+    <div id="modal-confirm" class="modal hidden">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content modal-content-sm">
+        <div class="modal-header">
+          <h2 id="confirm-title">Confirm Action</h2>
+          <button class="btn-close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p id="confirm-message">Are you sure you want to perform this action?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline btn-close-modal">Cancel</button>
+          <button type="button" id="btn-confirm-ok" class="btn btn-danger">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="modal-settings" class="modal hidden">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content modal-content-sm">
+        <div class="modal-header">
+          <h2>Settings</h2>
+          <button class="btn-close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="settings-form">
+            <div class="form-group">
+              <label for="settings-theme">Theme Preference</label>
+              <select id="settings-theme">
+                <option value="system">🌓 System Auto</option>
+                <option value="light">☀️ Light Mode</option>
+                <option value="dark">🌙 Dark Mode</option>
+              </select>
+            </div>
+            
+            <div class="form-group" style="margin-top: 16px;">
+              <label>Navigation Tabs Visibility</label>
+              <div class="checkbox-row" style="flex-direction: column; gap: 8px; align-items: flex-start; margin: 8px 0 0 0;">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="settings-show-diff" checked> Show Diff Tab
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="settings-show-snapshots" checked> Show Snapshots Tab
+                </label>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline btn-close-modal">Cancel</button>
+          <button type="button" id="btn-save-settings" class="btn btn-primary">Save Settings</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Area -->
+    <div id="toast-container" class="toast-container"></div>
+  </div>
+
+  <script type="module" src="./sidepanel.ts"></script>
+</body>
+</html>
