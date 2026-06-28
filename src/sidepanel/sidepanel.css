@@ -3,8 +3,8 @@
 
 :root {
   /* HSL Color System */
-  --primary-h: 250;
-  --primary-s: 70%;
+  --primary-h: 225;
+  --primary-s: 75%;
   --primary-l: 56%;
   
   --primary: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
@@ -154,9 +154,13 @@ body {
   font-family: var(--font-title);
   font-size: 16px;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--primary), hsl(280, 80%, 60%));
+  background: linear-gradient(135deg, #c2410c 0%, #047857 50%, #1d4ed8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+:root[data-theme="dark"] .logo-area h1 {
+  background: linear-gradient(135deg, #ff9e2c 0%, #10b981 50%, #60a5fa 100%);
 }
 
 .active-tab-info {

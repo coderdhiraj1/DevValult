@@ -21,9 +21,7 @@
     "service_worker": "src/background/service-worker.ts",
     "type": "module"
   },
-  "side_panel": {
-    "default_path": "src/sidepanel/sidepanel.html"
-  },
+
   "permissions": [
     "storage",
     "cookies",
