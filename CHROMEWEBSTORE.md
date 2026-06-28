@@ -1,6 +1,6 @@
 # Chrome Web Store Listing — DevVault
 
-> Last Updated: 2026-06-17
+> Last Updated: 2026-06-28
 
 ## Store Listing
 
@@ -43,7 +43,7 @@ English
 
 | Asset | Dimensions | Status | Filename |
 |-------|-----------|--------|----------|
-| Store Icon | 128×128 PNG | ⬜ Not created | (Fallback to Chrome default icon) |
+| Store Icon | 128×128 PNG | ✅ Created | `public/icons/icon-128.png` |
 | Screenshot 1 | 1280×800 | ⬜ Not created | |
 | Screenshot 2 | 1280×800 | ⬜ Not created | |
 
